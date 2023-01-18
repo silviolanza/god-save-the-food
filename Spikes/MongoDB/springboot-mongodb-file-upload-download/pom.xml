@@ -21,6 +21,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -37,9 +38,7 @@
 			<artifactId>commons-io</artifactId>
 			<version>2.8.0</version>
 		</dependency>
-
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>
@@ -47,7 +46,23 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>${project.parent.version}</version>
 			</plugin>
+
+			<plugin>
+        		<groupId>org.apache.maven.plugins</groupId>
+				<!-- 	Si tratta di un plugin usato nel testing per passare le giuste variabili
+						d'ambiente del server di Mongo le quali dovranno essere successivamente 
+						specificate nel Dockerfile	 -->
+        		<artifactId>maven-surefire-plugin</artifactId>
+        		<configuration>
+           			<environmentVariables>
+                		<MONGO_DB_PORT>27017</MONGO_DB_PORT>
+						<MONGO_DB_HOST>localhost</MONGO_DB_HOST>
+						<MONGO_DB_NAME>local</MONGO_DB_NAME>
+						<MONGO_DB_USER>root</MONGO_DB_USER>
+						<MONGO_DB_PASS>example</MONGO_DB_PASS>
+            		</environmentVariables>
+       		 	</configuration>
+    		</plugin>
 		</plugins>
 	</build>
-
 </project>
