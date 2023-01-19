@@ -54,5 +54,8 @@ o aprendo il file del front-end: `src/main/resources/static/index.html`
 ## Successivamente per effettuare la pulizia e la compilazione usare i seguenti comandi
 mvn clean package && java -jar target\fileUpload-0.0.1-SNAPSHOT.jar
 
-## In fine per l'esecuzione usare il seguente comando
+## Per l'esecuzione usare il seguente comando
 java -jar target\fileUpload-0.0.1-SNAPSHOT.jar
+
+## Per la Dockerizzazione dell'applicazione lanciare il comando
+docker build . -t "springboot-mongodb-file-upload-download"
