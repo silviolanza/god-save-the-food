@@ -1,11 +1,10 @@
 package com.goodsavethefood.storeservice.model;
 
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document("Stores")
+@Document("stores")
 public class StoreModel {
-
     @Id
     private String storeId;
     private String storeName;
@@ -17,20 +16,32 @@ public class StoreModel {
     private String storeDescription;
     private String storeLogo;
 
-    public String getId() {
+    public StoreModel(String storeId, String storeName, String VATid, String storeAddress, Boolean shippingAvailable, String storeOwnerId, String storeCategory, String storeDescription, String storeLogo) {
+        this.storeId = storeId;
+        this.storeName = storeName;
+        this.VATid = VATid;
+        this.storeAddress = storeAddress;
+        this.shippingAvailable = shippingAvailable;
+        this.storeOwnerId = storeOwnerId;
+        this.storeCategory = storeCategory;
+        this.storeDescription = storeDescription;
+        this.storeLogo = storeLogo;
+    }
+
+    public String getStoreId() {
         return storeId;
     }
 
-    public void setId(String id) {
-        this.storeId = id;
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
     }
 
-    public String getName() {
+    public String getStoreName() {
         return storeName;
     }
 
-    public void setName(String name) {
-        this.storeName = name;
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
     }
 
     public String getVATid() {
@@ -53,7 +64,7 @@ public class StoreModel {
         return shippingAvailable;
     }
 
-    public void setShippingAvailable(Boolean shippingAvailable){
+    public void setShippingAvailable(Boolean shippingAvailable) {
         this.shippingAvailable = shippingAvailable;
     }
 
