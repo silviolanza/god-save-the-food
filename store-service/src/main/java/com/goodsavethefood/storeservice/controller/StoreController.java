@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
 @RestController
-@RequestMapping("/api/stores")
+@RequestMapping("/api/stores/")
 
 public class StoreController {
     @Autowired
     StoreRepository storeRepo;
-    @GetMapping("/name/{storeName}")
+    @GetMapping("name/{storeName}")
     public ResponseEntity<?> findStore(@PathVariable String storeName){
         //creazione di un negozio
         System.out.println("Store creation started...");

@@ -39,6 +39,24 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<!-- 	Si tratta di un plugin usato nel testing per passare le giuste variabili
+						d'ambiente del server di Mongo le quali dovranno essere successivamente
+						specificate nel Dockerfile	 -->
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<environmentVariables>
+						<GSF_MONGO_DB_PORT>27017</GSF_MONGO_DB_PORT>
+						<GSF_MONGO_DB_HOST>localhost</GSF_MONGO_DB_HOST>
+						<GSF_MONGO_DB_AUTH>admin</GSF_MONGO_DB_AUTH>
+						<GSF_MONGO_DB_NAME>local</GSF_MONGO_DB_NAME>
+						<GSF_MONGO_DB_USER>root</GSF_MONGO_DB_USER>
+						<GSF_MONGO_DB_PASS>example</GSF_MONGO_DB_PASS>
+						<PRODUCT_WEB_SERVER_PORT>8080</PRODUCT_WEB_SERVER_PORT>
+					</environmentVariables>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
