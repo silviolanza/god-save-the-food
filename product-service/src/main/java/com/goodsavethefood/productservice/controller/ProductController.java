@@ -15,11 +15,11 @@ public class ProductController {
     ProductRepository productRepo;
     @GetMapping("name/{productName}")
     public ResponseEntity<?> findStore(@PathVariable String productName){
-        //creazione di un negozio
+        //creazione di un prodotto
         System.out.println("Store creation started...");
         productRepo.save(new ProductModel( "1", "1234", "Gianduiotti", 1.0f, 0.1f, 100, "Dal morbido incontro di cioccolato finissimo e nocciole Piemonte, un piacere vellutato, coinvolgente e assolutamente inimitabile." , "images/gianduiotti.jpeg"));
         System.out.println("Store creation complete...");
-        //cerca oggetto tramite il nome
+        //cerca prodotto tramite il nome
         ProductModel product = productRepo.findByProductName(productName);
         //stampa oggetto store
         return ResponseEntity.status(201).body(product);
