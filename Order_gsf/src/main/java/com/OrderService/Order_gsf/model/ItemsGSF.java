@@ -1,6 +1,6 @@
 package com.OrderService.Order_gsf.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,7 +12,6 @@ import java.util.List;
 public class ItemsGSF {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
     private Long id;
 
     @Column (name = "quantity")
@@ -28,12 +27,9 @@ public class ItemsGSF {
     private ProductGSF product;
 
     @ManyToMany (mappedBy = "item")
-    @JsonIgnore
     private List<OrderGSF> orders;
 
-    public ItemsGSF() {
-
-    }
+    public ItemsGSF() {}
 
     public ItemsGSF(@NotNull int quantity, ProductGSF product, BigDecimal subTotal) {
         this.quantity = quantity;

@@ -1,11 +1,7 @@
 package com.OrderService.Order_gsf.model;
 
-
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,7 +15,7 @@ public class UsersGSF {
     @Column(name = "user_name")
     private String userName;
 
-    @OneToMany (mappedBy = "user", targetEntity=OrderGSF.class)
+    @OneToMany (mappedBy = "user")
     @JsonIgnore
     private List<OrderGSF> orders;
 
@@ -53,6 +49,5 @@ public class UsersGSF {
         this.orders = orders;
     }
 
-    public UsersGSF() {
-    }
+    public UsersGSF() {}
 }

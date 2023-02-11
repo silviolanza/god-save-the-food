@@ -27,9 +27,6 @@ public class ProductGSF  {
     @Column(name="description")
     private String description;
 
-    @Column(name="quantity")
-    private int quantity;
-
     @Column(name="quantity_available")
     private int quantity_available;
     @OneToMany (mappedBy = "product", cascade = CascadeType.ALL)
@@ -82,14 +79,6 @@ public class ProductGSF  {
         this.description = description;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     public int getQuantity_available() {
         return quantity_available;
     }
@@ -97,7 +86,6 @@ public class ProductGSF  {
     public void setQuantity_available(int quantity_available) {
         this.quantity_available = quantity_available;
     }
-
 
 
     public ProductGSF() {}

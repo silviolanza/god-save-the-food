@@ -20,7 +20,7 @@ public class ControllerItemsGSF {
    private ItemsGSFService itemGSFService;
 
     @GetMapping (value = "/item", params = {"id"} )
-   public ResponseEntity<List<Object>> getItems (@PathVariable("id")Long itemId){
+   public ResponseEntity<?> getItems (@PathVariable("id")Long itemId){
         List<ItemsGSF> item= itemGSFService.getItem(itemId);
         if(!item.isEmpty())
             return new ResponseEntity<List<Object>>(HttpStatus.OK);
@@ -30,35 +30,30 @@ public class ControllerItemsGSF {
     @GetMapping("/item")
     public List<ItemsGSF> getAllItems() {
         System.out.println("Get all items...");
-
         List<ItemsGSF> items = new ArrayList<>();
         items= itemGSFService.getAllItems();
-
         return items;
     }
 
-    @PostMapping(value = "/item", params = {"productId", "quantity"})
-    public ResponseEntity<List<Object>> addItem(@RequestParam("productId") Long productId, @RequestParam("quantity") Integer quantity, @PathVariable("id")long itemId) {
+    @PostMapping(value = "/item")
+    public ResponseEntity<?> addItem(@RequestParam("productId") Long productId, @RequestParam("quantity") Integer quantity, @RequestParam("id") Long itemId) {
+        List<ItemsGSF> item = itemGSFService.getItem(itemId);
+        if(item == null)
+            itemGSFService.addItem(itemId, productId, quantity);
+        else{
+            if(itemGSFService.checkIfItemIsExist(itemId, productId))
+                itemGSFService.changeItemQuantity(itemId, productId, quantity);
+            else
+                itemGSFService.addItem(itemId, productId, quantity);
+        }
+
+        return new ResponseEntity<List<Object>>((MultiValueMap<String, String>) item, HttpStatus.CREATED);
+    }
+    @DeleteMapping(value = "/item")
+    public ResponseEntity<?> removeItem(@RequestParam("productId") Long productId, @RequestParam("id") Long itemId){
         List<ItemsGSF> item = itemGSFService.getItem(itemId);
         if(item != null) {
-            if(item.isEmpty()){
-                itemGSFService.addItem(itemId, productId, quantity);
-            }else{
-                if(itemGSFService.checkIfItemIsExist(itemId, productId)){
-                    itemGSFService.changeItemQuantity(itemId, productId, quantity);
-                }else {
-                    itemGSFService.addItem(itemId, productId, quantity);
-                }
-            }
-            return new ResponseEntity<List<Object>>((MultiValueMap<String, String>) item, HttpStatus.CREATED);
-        }
-        return new ResponseEntity<List<Object>>(HttpStatus.BAD_REQUEST);
-    }
-    @DeleteMapping(value = "/item", params = "productId")
-    public ResponseEntity<Void> removeItem(@RequestParam("productId") Long productId, @PathVariable("id") long cartId){
-        List<ItemsGSF> item = itemGSFService.getItem(cartId);
-        if(item != null) {
-            itemGSFService.deleteAllItem(cartId, productId);
+            itemGSFService.deleteAllItem(itemId, productId);
             return new ResponseEntity<Void>(HttpStatus.OK);
         }
         return new ResponseEntity<Void> (HttpStatus.NOT_FOUND);

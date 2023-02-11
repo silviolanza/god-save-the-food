@@ -2,10 +2,8 @@ package com.OrderService.Order_gsf.controller;
 
 import com.OrderService.Order_gsf.model.ItemsGSF;
 import com.OrderService.Order_gsf.model.OrderGSF;
-import com.OrderService.Order_gsf.model.ProductGSF;
 import com.OrderService.Order_gsf.model.UsersGSF;
 import com.OrderService.Order_gsf.other_client.UserGSFClient;
-import com.OrderService.Order_gsf.repo.ItemsGSFRepository;
 
 import com.OrderService.Order_gsf.service.ItemsGSFService;
 import com.OrderService.Order_gsf.service.OrderGSFService;
@@ -66,5 +64,12 @@ public class ControllerOrderGSF {
             total = total.add(item.get(i).getSubTotal());
         }
         return total;
+    }
+    @GetMapping("/order")
+    public List<OrderGSF> getAllItems() {
+        System.out.println("Get all order...");
+        List<OrderGSF> order = new ArrayList<>();
+        order= orderGSFService.getAllOrder();
+        return order;
     }
 }
