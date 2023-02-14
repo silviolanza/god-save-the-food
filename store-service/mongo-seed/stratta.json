@@ -1,0 +1,11 @@
+{
+  "_id": ObjectID(),
+  "storeName": "Stratta",
+  "VATid": "00471870014",
+  "storeAddress": "Piazza S. Carlo, 191",
+  "shippingAvailable": true,
+  "storeOwnerId": "1234",
+  "storeCategory": "pasticceria",
+  "storeDescription": "Siamo una delle pasticcerie più antiche della città di Torino. Stratta nasce nel 1836 come confetteria e fornitore ufficiale della Real Casa e di Camillo Benso Conte di Cavour. Oggi è uno dei locali storici più rinomati di Torino, alla cui base del nostro successo c’è un valore imprescindibile: La famiglia.",
+  "storeLogo": "images/stratta.jpeg"
+}
