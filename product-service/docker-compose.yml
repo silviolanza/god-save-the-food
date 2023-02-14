@@ -24,6 +24,7 @@ services:
       ME_CONFIG_MONGODB_PORT: "27017"
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      #ME_CONFIG_SITE_BASEURL: /express
     networks:
       - mongonet
     depends_on:
