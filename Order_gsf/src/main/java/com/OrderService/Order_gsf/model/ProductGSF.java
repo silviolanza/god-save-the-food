@@ -16,9 +16,7 @@ public class ProductGSF  {
    private long id;
 
     @Column(name="idProduct")
-   private int idProduct;
-
-
+    private int idProduct;
     @Column(name="price")
     private BigDecimal price;
 
