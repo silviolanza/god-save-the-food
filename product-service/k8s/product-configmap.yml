@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: product-configmap
+  namespace: slanza
+data:
+  database_url: product-mongodb-service
+  database_port: "27017"
+  database_db_auth: admin
+  database_name: products
+  spring_app_port: "8080"
+  mongo_express_baseurl: /api/products/express
