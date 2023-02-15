@@ -1,7 +1,7 @@
 version: '3.2'
 services:
 
-  mongo:
+  store-mongo:
     image: mongo:latest
     restart: unless-stopped
     environment:
@@ -12,29 +12,30 @@ services:
     volumes:
       - ~/.docker-conf/mongodb/data/:/data/db
     networks:
-      - mongonet
+      - store-net
 
-  mongo-express:
+  store-mongo-express:
     image: mongo-express:latest
     restart: unless-stopped
     ports:
       - 8081:8081
     environment:
-      ME_CONFIG_MONGODB_SERVER: mongo
+      ME_CONFIG_MONGODB_SERVER: store-mongo
       ME_CONFIG_MONGODB_PORT: "27017"
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      #ME_CONFIG_SITE_BASEURL: /express
     networks:
-      - mongonet
+      - store-net
     depends_on:
-      - mongo
+      - store-mongo
 
   store-spring-app:
     build: ./
     restart: unless-stopped
     container_name: store-spring-app
     environment:
-      GSF_MONGO_DB_HOST: mongo
+      GSF_MONGO_DB_HOST: store-mongo
       GSF_MONGO_DB_PORT: "27017"
       GSF_MONGO_DB_AUTH: admin
       GSF_MONGO_DB_USER: root
@@ -44,10 +45,10 @@ services:
     ports:
       - 8080:8080
     networks:
-      - mongonet
+      - store-net
     depends_on:
-      - mongo
+      - store-mongo
 
 networks:
-  mongonet:
+  store-net:
     driver: bridge

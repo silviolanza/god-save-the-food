@@ -9,10 +9,10 @@ import com.goodsavethefood.storeservice.model.StoreModel;
 
 public interface StoreRepository extends MongoRepository<StoreModel, String> {
 
-    @Query(collation = "{'locale': 'it', 'strength': 2}")
+    @Query("{storeName:'?0'}")
     StoreModel findByStoreName(String storeName);
 
-    @Query(collation = "{'locale': 'it', 'strength': 2}")
+    @Query("{storeCategory:'?0'}")
     List<StoreModel> findAllStoreByCategory(String storeCategory);
 
 }
