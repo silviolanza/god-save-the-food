@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mongodb-deployment
+  name: store-mongodb-deployment
   namespace: slanza
   labels:
-    app: mongodb
+    app: store-mongodb
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mongodb
+      app: store-mongodb
   template:
     metadata:
       labels:
-        app: mongodb
+        app: store-mongodb
     spec:
       containers:
-        - name: mongodb
+        - name: store-mongodb
           image: mongo
           ports:
             - containerPort: 27017
@@ -24,22 +24,22 @@ spec:
             - name: MONGO_INITDB_ROOT_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: mongodb-secret
+                  name: store-secret
                   key: mongo-root-username
             - name: MONGO_INITDB_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: mongodb-secret
+                  name: store-secret
                   key: mongo-root-password
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: mongodb-service
+  name: store-mongodb-service
   namespace: slanza
 spec:
   selector:
-    app: mongodb
+    app: store-mongodb
   ports:
     - protocol: TCP
       port: 27017

@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: product-spring-app-deployment
+  name: store-spring-app-deployment
   namespace: slanza
   labels:
-    app: product-spring-app
+    app: store-spring-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: product-spring-app
+      app: store-spring-app
   template:
     metadata:
       labels:
-        app: product-spring-app
+        app: store-spring-app
     spec:
       containers:
-        - name: product-spring-app
-          image: silviolanza/product-spring-app
+        - name: store-spring-app
+          image: silviolanza/store-spring-app
           ports:
             - containerPort: 8080
           #imagePullPolicy: Never
@@ -25,47 +25,47 @@ spec:
             - name: GSF_MONGO_DB_HOST
               valueFrom:
                 configMapKeyRef:
-                  name: product-configmap
+                  name: store-configmap
                   key: database_url
             - name: GSF_MONGO_DB_PORT
               valueFrom:
                 configMapKeyRef:
-                  name: product-configmap
+                  name: store-configmap
                   key: database_port
             - name: GSF_MONGO_DB_AUTH
               valueFrom:
                 configMapKeyRef:
-                  name: product-configmap
+                  name: store-configmap
                   key: database_db_auth
             - name: GSF_MONGO_DB_USER
               valueFrom:
                 secretKeyRef:
-                  name: product-secret
+                  name: store-secret
                   key: mongo-root-username
             - name: GSF_MONGO_DB_PASS
               valueFrom:
                 secretKeyRef:
-                  name: product-secret
+                  name: store-secret
                   key: mongo-root-password
             - name: GSF_MONGO_DB_NAME
               valueFrom:
                 configMapKeyRef:
-                  name: product-configmap
+                  name: store-configmap
                   key: database_name
-            - name: PRODUCT_WEB_SERVER_PORT
+            - name: STORE_WEB_SERVER_PORT
               valueFrom:
                 configMapKeyRef:
-                  name: product-configmap
+                  name: store-configmap
                   key: spring_app_port
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: product-spring-app-service
+  name: store-spring-app-service
   namespace: slanza
 spec:
   selector:
-    app: product-spring-app
+    app: store-spring-app
   ports:
     - protocol: TCP
       port: 8080
