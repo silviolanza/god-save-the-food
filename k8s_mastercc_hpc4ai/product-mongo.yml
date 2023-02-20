@@ -1,11 +1,12 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: product-mongodb-deployment
+  name: product-mongodb-statefulset
   namespace: slanza
   labels:
     app: product-mongodb
 spec:
+  serviceName: product-mongodb
   replicas: 1
   selector:
     matchLabels:
@@ -31,6 +32,18 @@ spec:
                 secretKeyRef:
                   name: product-secret
                   key: mongo-root-password
+          volumeMounts:
+            - name: product-mongodb-persistent-storage
+              mountPath: /data/db
+  volumeClaimTemplates:
+    - metadata:
+        name: product-mongodb-persistent-storage
+      spec:
+        storageClassName: cdk-cinder
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 2Gi
 ---
 apiVersion: v1
 kind: Service
