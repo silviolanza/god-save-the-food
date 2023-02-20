@@ -12,7 +12,7 @@ public interface ProductRepository  extends MongoRepository<ProductModel, String
     @Query("{productName:'?0'}")
     ProductModel findByProductName(String productName);
 
-    @Query("{productCategory:'?0'}")
-    List<ProductModel> findAllProductByCategory(String productCategory);
+    @Query("{storeId:'?0'}")
+    List<ProductModel> findAllProductByStore(String productCategory);
 
 }

@@ -20,8 +20,8 @@
     minikube service mongodb-express-service --url -n mongodb-namespace
 
 ## Comando Docker-HUB push image
-    docker build -t silviolanza/store-spring-app:0.1 .
-    docker push silviolanza/store-spring-app:0.1
+    docker build -t silviolanza/store-spring-app:latest .
+    docker push silviolanza/store-spring-app:latest
 
 ## Comandi Kubectl
     kubectl apply -f .

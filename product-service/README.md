@@ -21,13 +21,13 @@
     minikube service mongodb-express-service --url -n mongodb-namespace
 
 ## Comando Docker-HUB push image
-    docker build -t silviolanza/product-spring-app:0.1 .
-    docker push silviolanza/product-spring-app:0.1
+    docker build --no-cache -t silviolanza/product-spring-app:latest .
+    docker push silviolanza/product-spring-app:latest
 
 ## Comandi Kubectl
     kubectl apply -f .
     kubectl delete -f .
-    kubectl get po
+    kubectl get pods
 
 ## Comandi per ricavare URL service di MiniKube
     kubectl get services --all-namespaces
