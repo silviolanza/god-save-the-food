@@ -1,11 +1,9 @@
 package com.OrderService.Order_gsf.service;
 
 import com.OrderService.Order_gsf.model.ItemsGSF;
-import com.OrderService.Order_gsf.model.OrderGSF;
 import com.OrderService.Order_gsf.model.ProductGSF;
-import com.OrderService.Order_gsf.other_client.ProductGSFClient;
+
 import com.OrderService.Order_gsf.repo.ItemsGSFRepository;
-import com.OrderService.Order_gsf.repo.OrderGSFRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +17,7 @@ public class ItemsGSFServiceImpl implements ItemsGSFService{
 
     @Autowired
     private ItemsGSFRepository itemsGSFRepository;
-    private ProductGSFClient productClient;
+
 
     public static BigDecimal getSubTotalForItem(ProductGSF product, int quantity){
         return (product.getPrice()).multiply(BigDecimal.valueOf(quantity));
@@ -27,9 +25,8 @@ public class ItemsGSFServiceImpl implements ItemsGSFService{
 
 
     @Override
-    public void addItem(Long itemId, Long productId, Integer quantity) {
-        ProductGSF prod=productClient.getProductById(productId);
-        ItemsGSF item=new ItemsGSF(quantity,prod,getSubTotalForItem(prod,quantity));
+   public void addItem(int productId, int quantity) {
+        ItemsGSF item=new ItemsGSF(quantity,productId,BigDecimal.valueOf(quantity));
         itemsGSFRepository.save(item);
     }
 
@@ -39,13 +36,13 @@ public class ItemsGSFServiceImpl implements ItemsGSFService{
     }
 
     @Override
-    public void changeItemQuantity(Long itemId, Long productId, Integer quantity) {
+    public void changeItemQuantity( int productId, Integer quantity, BigDecimal subtotal) {
         List<ItemsGSF> it= (List<ItemsGSF>) itemsGSFRepository.findAll();
         for (ItemsGSF item : it){
-            if(item.getProduct().getId()==productId){
+            if(item.getProduct()==productId){
                 itemsGSFRepository.deleteById(item.getId());
                 item.setQuantity(quantity);
-                item.setSubTotal(getSubTotalForItem(item.getProduct(),quantity));
+                item.setSubTotal(subtotal);
                 itemsGSFRepository.save(item);
 
             }
@@ -53,20 +50,20 @@ public class ItemsGSFServiceImpl implements ItemsGSFService{
     }
 
     @Override
-    public void deleteAllItem(Long itemId, Long productId) {
+    public void deleteAllItem(Long itemId, int productId) {
         List<ItemsGSF> it= (List<ItemsGSF>) itemsGSFRepository.findAll();
         for (ItemsGSF item : it){
-            if(item.getProduct().getId()==productId)
+            if(item.getProduct()==productId)
                 itemsGSFRepository.deleteById(item.getId());
 
         }
     }
 
     @Override
-    public boolean checkIfItemIsExist(Long itemId, Long productId) {
+    public boolean checkIfItemIsExist(Long itemId, int productId) {
         List<ItemsGSF> it= (List<ItemsGSF>) itemsGSFRepository.findAll();
         for (ItemsGSF item : it){
-            if(item.getProduct().getId()==productId)
+            if(item.getProduct()==productId)
                 return true;
         }
         return false;

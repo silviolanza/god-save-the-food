@@ -2,6 +2,8 @@ package com.OrderService.Order_gsf.model;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -22,19 +24,22 @@ public class ItemsGSF {
     @NotNull
     private BigDecimal subTotal;
 
-    @ManyToOne (cascade = CascadeType.ALL)
-    @JoinColumn (name = "product_id")
-    private ProductGSF product;
+    @Column (name = "idProduct")
+    @JsonIgnore
+    private Integer idProduct;
 
-    @ManyToMany (mappedBy = "item")
-    private List<OrderGSF> orders;
 
     public ItemsGSF() {}
 
-    public ItemsGSF(@NotNull int quantity, ProductGSF product, BigDecimal subTotal) {
+    public ItemsGSF(@NotNull int quantity, int idProduct, BigDecimal subTotal) {
         this.quantity = quantity;
-        this.product = product;
+        this.idProduct = idProduct;
         this.subTotal = subTotal;
+    }
+    public ItemsGSF(@NotNull int quantity, int idProduct) {
+        this.quantity = quantity;
+        this.idProduct = idProduct;
+
     }
 
     public Long getId() {
@@ -61,19 +66,13 @@ public class ItemsGSF {
         this.subTotal = subTotal;
     }
 
-    public ProductGSF getProduct() {
-        return product;
+    public int getProduct() {
+        return idProduct;
     }
 
-    public void setProduct(ProductGSF product) {
-        this.product = product;
+    public void setProduct(int idProduct) {
+        this.idProduct = idProduct;
     }
 
-    public List<OrderGSF> getOrders() {
-        return orders;
-    }
 
-    public void setOrders(List<OrderGSF> orders) {
-        this.orders = orders;
-    }
 }

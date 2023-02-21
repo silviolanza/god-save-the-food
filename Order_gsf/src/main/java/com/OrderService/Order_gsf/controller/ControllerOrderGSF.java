@@ -1,9 +1,7 @@
 package com.OrderService.Order_gsf.controller;
 
-import com.OrderService.Order_gsf.model.ItemsGSF;
-import com.OrderService.Order_gsf.model.OrderGSF;
-import com.OrderService.Order_gsf.model.UsersGSF;
-import com.OrderService.Order_gsf.other_client.UserGSFClient;
+import com.OrderService.Order_gsf.model.*;
+
 
 import com.OrderService.Order_gsf.service.ItemsGSFService;
 import com.OrderService.Order_gsf.service.OrderGSFService;
@@ -26,20 +24,17 @@ public class ControllerOrderGSF {
     @Autowired
     private ItemsGSFService itemGSFService;
 
-    private UserGSFClient userGSFClient;
 
 
-    @PostMapping(value = "/order/{userId}")
-    public ResponseEntity<OrderGSF> saveOrder(@PathVariable("userId") Long userId, @PathVariable("id") Long itemId) {
-
-       List<ItemsGSF> items = itemGSFService.getItem(itemId);
-        UsersGSF user = userGSFClient.getUserById(userId);
-        if (items != null && user != null) {
-            OrderGSF order = this.createOrder(items,user);
+    @PostMapping(value = "/order/create")
+     public ResponseEntity saveOrder(@RequestBody OrderRequest items) {
+        String userId="Giuseppe";
+       List<ItemsGSF> item_id = items.getItems();
+        if (items!=null && userId != null) {
+            OrderGSF order = this.createOrder(item_id,userId);
             try {
                 orderGSFService.saveOrder(order);
-                itemGSFService.deleteItem(itemId);
-                return new ResponseEntity<OrderGSF>(order, HttpStatus.CREATED);
+                return new ResponseEntity(order, HttpStatus.CREATED);
             } catch (Exception ex) {
                 ex.printStackTrace();
                 return new ResponseEntity<OrderGSF>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -48,11 +43,11 @@ public class ControllerOrderGSF {
         return new ResponseEntity<OrderGSF>(HttpStatus.NOT_FOUND);
     }
 
-    private OrderGSF createOrder(List<ItemsGSF> item, UsersGSF user) {
+    private OrderGSF createOrder(List<ItemsGSF> item, String user) {
         OrderGSF order = new OrderGSF();
         order.setItem(item);
         order.setUser(user);
-        order.setTotal(countTotalPrice(item));
+        order.setTotal(BigDecimal.valueOf(12.00));
         order.setDate(LocalDate.now());
         order.setStatus("PAYMENT_EXPECTED");
         return order;

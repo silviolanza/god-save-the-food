@@ -9,6 +9,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,21 +37,22 @@ public class ControllerItemsGSF {
     }
 
     @PostMapping(value = "/item")
-    public ResponseEntity<?> addItem(@RequestParam("productId") Long productId, @RequestParam("quantity") Integer quantity, @RequestParam("id") Long itemId) {
+    public ResponseEntity<?> addItem(@RequestParam("productId") int productId, @RequestParam("quantity") Integer quantity, @RequestParam("id") Long itemId) {
         List<ItemsGSF> item = itemGSFService.getItem(itemId);
         if(item == null)
-            itemGSFService.addItem(itemId, productId, quantity);
+            //int productId, int quantity, BigDecimal subTotal);
+            itemGSFService.addItem(productId, quantity);
         else{
             if(itemGSFService.checkIfItemIsExist(itemId, productId))
-                itemGSFService.changeItemQuantity(itemId, productId, quantity);
+                itemGSFService.changeItemQuantity(productId, quantity, BigDecimal.valueOf(quantity));
             else
-                itemGSFService.addItem(itemId, productId, quantity);
+                itemGSFService.addItem(productId, quantity);
         }
 
         return new ResponseEntity<List<Object>>((MultiValueMap<String, String>) item, HttpStatus.CREATED);
     }
     @DeleteMapping(value = "/item")
-    public ResponseEntity<?> removeItem(@RequestParam("productId") Long productId, @RequestParam("id") Long itemId){
+    public ResponseEntity<?> removeItem(@RequestParam("productId") int productId, @RequestParam("id") Long itemId){
         List<ItemsGSF> item = itemGSFService.getItem(itemId);
         if(item != null) {
             itemGSFService.deleteAllItem(itemId, productId);

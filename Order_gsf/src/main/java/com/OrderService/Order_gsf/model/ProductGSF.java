@@ -13,7 +13,7 @@ import java.util.List;
 public class ProductGSF  {
    @Id
    @GeneratedValue(strategy = GenerationType.AUTO)
-   private long id;
+   private Long id;
 
     @Column(name="idProduct")
     private int idProduct;
@@ -27,23 +27,26 @@ public class ProductGSF  {
 
     @Column(name="quantity_available")
     private int quantity_available;
-    @OneToMany (mappedBy = "product", cascade = CascadeType.ALL)
+    /*@OneToMany
     @JsonIgnore
+    @Column(name="item_id")
     private List<ItemsGSF> items;
-    public long getId() {
+
+*/
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
-    public List<ItemsGSF> getItems() {
+    /*public List<ItemsGSF> getItems() {
         return items;
     }
 
     public void setItems(List<ItemsGSF> items) {
         this.items = items;
-    }
+    }*/
 
     public int getIdProduct() {
         return idProduct;

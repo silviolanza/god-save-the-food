@@ -15,9 +15,6 @@ public class UsersGSF {
     @Column(name = "user_name")
     private String userName;
 
-    @OneToMany (mappedBy = "user")
-    @JsonIgnore
-    private List<OrderGSF> orders;
 
     public String getUserName() {
         return userName;
@@ -25,14 +22,6 @@ public class UsersGSF {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public List<OrderGSF> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<OrderGSF> orders) {
-        this.orders = orders;
     }
 
     public Long getId() {
@@ -46,7 +35,6 @@ public class UsersGSF {
     public UsersGSF(Long id, String userName, List<OrderGSF> orders) {
         this.id = id;
         this.userName = userName;
-        this.orders = orders;
     }
 
     public UsersGSF() {}

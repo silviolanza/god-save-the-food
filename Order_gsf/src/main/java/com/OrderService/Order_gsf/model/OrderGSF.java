@@ -13,9 +13,9 @@ public class OrderGSF {
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
         private Long id;
-        @ManyToOne (cascade = CascadeType.ALL, targetEntity=UsersGSF.class)
-        @JoinColumn (name = "user_id")
-        private UsersGSF user;
+
+        @Column (name = "user_id")
+        private String userid;
 
         @Column(name = "date")
         private LocalDate date;
@@ -25,28 +25,25 @@ public class OrderGSF {
 
         @Column(name="status")
         private String status;
-        @ManyToMany (cascade = CascadeType.ALL)
-        @JoinTable (name = "cart" , joinColumns = @JoinColumn(name = "order_id"), inverseJoinColumns = @JoinColumn (name = "item_id"))
+        @OneToMany
+        @Column(name="item_id")
         private List<ItemsGSF> item;
 
-        public long getId() {
+        public Long getId() {
         return id;
     }
 
-        public void setId(long id) {
-        this.id = id;
-    }
 
         public void setId(Long id) {
         this.id = id;
     }
 
-        public UsersGSF getUser() {
-        return user;
+        public String getUser() {
+        return userid;
     }
 
-        public void setUser(UsersGSF user) {
-        this.user = user;
+        public void setUser(String user) {
+        this.userid = user;
     }
 
         public LocalDate getDate() {
@@ -81,13 +78,12 @@ public class OrderGSF {
             this.item = item;
         }
 
-        public OrderGSF(Long id, UsersGSF user, LocalDate date, BigDecimal total, String status, List<ItemsGSF>item) {
-            this.id = id;
-            this.user = user;
+        public OrderGSF(String userid, LocalDate date, BigDecimal total, String status) {
+            this.userid = userid;
             this.date = date;
             this.total = total;
             this.status = status;
-            this.item = item;
+           // this.item = item;
         }
 
         public OrderGSF(){}
