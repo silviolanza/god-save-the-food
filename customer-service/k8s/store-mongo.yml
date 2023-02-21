@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: product-mongodb-statefulset
+  name: store-mongodb-statefulset
   namespace: slanza
   labels:
-    app: product-mongodb
+    app: store-mongodb
 spec:
-  serviceName: product-mongodb
+  serviceName: store-mongodb
   replicas: 1
   selector:
     matchLabels:
-      app: product-mongodb
+      app: store-mongodb
   template:
     metadata:
       labels:
-        app: product-mongodb
+        app: store-mongodb
     spec:
       containers:
-        - name: product-mongodb
+        - name: store-mongodb
           image: mongo
           ports:
             - containerPort: 27017
@@ -25,19 +25,19 @@ spec:
             - name: MONGO_INITDB_ROOT_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: product-secret
+                  name: store-secret
                   key: mongo-root-username
             - name: MONGO_INITDB_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: product-secret
+                  name: store-secret
                   key: mongo-root-password
           volumeMounts:
-            - name: product-mongodb-persistent-storage
+            - name: store-mongodb-persistent-storage
               mountPath: /data/db
   volumeClaimTemplates:
     - metadata:
-        name: product-mongodb-persistent-storage
+        name: store-mongodb-persistent-storage
       spec:
         storageClassName: cdk-cinder
         accessModes: [ "ReadWriteOnce" ]
@@ -48,11 +48,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: product-mongodb-service
+  name: store-mongodb-service
   namespace: slanza
 spec:
   selector:
-    app: product-mongodb
+    app: store-mongodb
   ports:
     - protocol: TCP
       port: 27017
