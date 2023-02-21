@@ -2,4 +2,9 @@
 .idea/
 *.iws
 *.iml
+<<<<<<< HEAD
 *.ipr
+=======
+*.ipr
+*.project
+>>>>>>> origin/customer-service

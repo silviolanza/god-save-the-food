@@ -1,0 +1,56 @@
+version: '3'
+
+services:
+  gsfpostgres:
+    container_name: gsfpostgres
+    image: "postgres"
+    ports:
+      - "5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - customer-network
+    environment:
+      POSTGRES_DB: customerdb
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      restart: unless-stopped
+  pgadmin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+      PGADMIN_LISTEN_PORT: 50
+    ports:
+      - "5050:50"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    depends_on:
+      - gsfpostgres
+    networks:
+      - customer-network
+  app:
+    build: .
+    image: customergsf
+    container_name: customergsf
+    ports:
+      - "8083:8080"
+    depends_on:
+      - gsfpostgres
+    networks:
+      - customer-network
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://gsfpostgres:5432/customerdb
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=admin
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+volumes:
+  db-data:
+  pgadmin-data:
+networks:
+  customer-network:
+    driver: bridge
+# docker-compose build && docker-compose up
+
