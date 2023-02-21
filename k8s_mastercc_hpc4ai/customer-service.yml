@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customer-spring-app-deployment
+  namespace: slanza
+  labels:
+    app: customer-spring-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: customer-spring-app
+  template:
+    metadata:
+      labels:
+        app: customer-spring-app
+    spec:
+      containers:
+        - name: customer-spring-app
+          image: silviolanza/customer-spring-app
+          ports:
+            - containerPort: 8080
+          #imagePullPolicy: Never
+          env:
+            - name: GSF_DB_SERVER
+              valueFrom:
+                configMapKeyRef:
+                  name: customer-configmap
+                  key: database_url
+            - name: GSF_POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: customer-configmap
+                  key: database_name
+            - name: GSF_POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: customer-secret
+                  key: postgres-root-username
+            - name: GSF_POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: customer-secret
+                  key: postgres-root-password
+            - name: GSF_WEB_SERVER_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: customer-configmap
+                  key: spring_app_port
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: customer-spring-app-service
+  namespace: slanza
+spec:
+  selector:
+    app: customer-spring-app
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080

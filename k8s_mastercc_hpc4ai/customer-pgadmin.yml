@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customer-pgadmin-deployment
+  namespace: slanza
+  labels:
+    app: customer-pgadmin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: customer-pgadmin
+  template:
+    metadata:
+      labels:
+        app: customer-pgadmin
+    spec:
+      containers:
+        - name: customer-pgadmin
+          image: dpage/pgadmin4
+          ports:
+            - containerPort: 5050
+          env:
+            - name: PGADMIN_DEFAULT_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: customer-secret
+                  key: pgadmin-root-email
+            - name: PGADMIN_DEFAULT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: customer-secret
+                  key: pgadmin-root-password
+            - name: PGADMIN_LISTEN_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: customer-configmap
+                  key: pgadmin_listen_port
+            - name: SCRIPT_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: customer-configmap
+                  key: pgadmin_baseurl
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: customer-pgadmin-service
+  namespace: slanza
+spec:
+  selector:
+    app: customer-pgadmin
+  ports:
+    - protocol: TCP
+      port: 5050
+      targetPort: 5050
