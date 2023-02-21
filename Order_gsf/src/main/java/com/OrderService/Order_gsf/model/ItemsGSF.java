@@ -14,7 +14,7 @@ import java.util.List;
 public class ItemsGSF {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column (name = "quantity")
     @NotNull
@@ -31,30 +31,30 @@ public class ItemsGSF {
 
     public ItemsGSF() {}
 
-    public ItemsGSF(@NotNull int quantity, int idProduct, BigDecimal subTotal) {
+    public ItemsGSF( int quantity, int idProduct, BigDecimal subTotal) {
         this.quantity = quantity;
         this.idProduct = idProduct;
         this.subTotal = subTotal;
     }
-    public ItemsGSF(@NotNull int quantity, int idProduct) {
+    public ItemsGSF( int quantity, int idProduct) {
         this.quantity = quantity;
         this.idProduct = idProduct;
 
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 
@@ -66,11 +66,11 @@ public class ItemsGSF {
         this.subTotal = subTotal;
     }
 
-    public int getProduct() {
+    public Integer getProduct() {
         return idProduct;
     }
 
-    public void setProduct(int idProduct) {
+    public void setProduct(Integer idProduct) {
         this.idProduct = idProduct;
     }
 

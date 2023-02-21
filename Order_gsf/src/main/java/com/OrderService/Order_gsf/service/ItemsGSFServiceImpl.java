@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ItemsGSFServiceImpl implements ItemsGSFService{
@@ -25,14 +25,14 @@ public class ItemsGSFServiceImpl implements ItemsGSFService{
 
 
     @Override
-   public void addItem(int productId, int quantity) {
-        ItemsGSF item=new ItemsGSF(quantity,productId,BigDecimal.valueOf(quantity));
-        itemsGSFRepository.save(item);
+   public ItemsGSF addNewItem(int idProduct, int quantity) {
+        ItemsGSF item=itemsGSFRepository.save(new ItemsGSF(quantity,idProduct,BigDecimal.valueOf(quantity)));
+        return item;
     }
 
     @Override
-    public List<ItemsGSF> getItem(Long itemId) {
-        return (List<ItemsGSF>) itemsGSFRepository.findAllById(Collections.singleton(itemId));
+    public Optional<ItemsGSF> getItem(long id) {
+        return itemsGSFRepository.findById(id);
     }
 
     @Override
@@ -49,15 +49,6 @@ public class ItemsGSFServiceImpl implements ItemsGSFService{
         }
     }
 
-    @Override
-    public void deleteAllItem(Long itemId, int productId) {
-        List<ItemsGSF> it= (List<ItemsGSF>) itemsGSFRepository.findAll();
-        for (ItemsGSF item : it){
-            if(item.getProduct()==productId)
-                itemsGSFRepository.deleteById(item.getId());
-
-        }
-    }
 
     @Override
     public boolean checkIfItemIsExist(Long itemId, int productId) {
@@ -80,6 +71,8 @@ public class ItemsGSFServiceImpl implements ItemsGSFService{
         itemsGSFRepository.deleteById(itemId);
     }
 
-
+    public ItemsGSF saveItem (ItemsGSF item) {
+        return itemsGSFRepository.save(item);
+    }
 
 }
