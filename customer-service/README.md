@@ -17,8 +17,6 @@
     minikube start
     minikube dashboard --url
     minikube stop
-    minikube service mongodb-express-service --url -n mongodb-namespace
-
 ## Comando Docker-HUB push image
     docker build -t silviolanza/customer-spring-app:latest .
     docker push silviolanza/customer-spring-app:latest
@@ -30,5 +28,4 @@
 
 ## Comandi per ricavare URL service di MiniKube
     kubectl get services --all-namespaces
-    minikube service mongodb-express-service --url -n mongodb-namespace
-    minikube service store-spring-app --url -n mongodb-namespace
+    minikube service customer-spring-app --url -n slanza

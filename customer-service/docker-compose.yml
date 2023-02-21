@@ -5,7 +5,7 @@ services:
     container_name: gsfpostgres
     image: "postgres"
     ports:
-      - "5432"
+      - "5432:5432"
     volumes:
       - db-data:/var/lib/postgresql/data
     networks:
@@ -36,16 +36,17 @@ services:
     image: customergsf
     container_name: customergsf
     ports:
-      - "8083:8080"
+      - "8080:8080"
     depends_on:
       - gsfpostgres
     networks:
       - customer-network
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://gsfpostgres:5432/customerdb
-      - SPRING_DATASOURCE_USERNAME=admin
-      - SPRING_DATASOURCE_PASSWORD=admin
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - GSF_DB_SERVER=gsfpostgres:5432
+      - GSF_POSTGRES_DB=customerdb
+      - GSF_POSTGRES_USER=admin
+      - GSF_POSTGRES_PASSWORD=admin
+      - GSF_WEB_SERVER_PORT=8080
 volumes:
   db-data:
   pgadmin-data:
@@ -53,4 +54,3 @@ networks:
   customer-network:
     driver: bridge
 # docker-compose build && docker-compose up
-
