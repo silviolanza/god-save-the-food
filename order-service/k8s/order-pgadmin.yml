@@ -44,7 +44,7 @@ spec:
                   key: pgadmin_baseurl
           volumeMounts:
             - name: order-pgadmin-persistent-storage
-              mountPath: /var/lib/pgadmin
+              mountPath: /var/lib/
               subPath: pgadmin
   volumeClaimTemplates:
     - metadata:

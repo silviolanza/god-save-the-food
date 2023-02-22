@@ -44,14 +44,14 @@ spec:
                   key: pgadmin_baseurl
           volumeMounts:
             - name: customer-pgadmin-persistent-storage
-              mountPath: /var/lib/pgadmin
+              mountPath: /var/lib/
               subPath: pgadmin
   volumeClaimTemplates:
     - metadata:
         name: customer-pgadmin-persistent-storage
       spec:
         storageClassName: cdk-cinder
-        accessModes: [ "ReadWriteOnce" ]
+        accessModes: [ "ReadWriteMany" ]
         resources:
           requests:
             storage: 2Gi
