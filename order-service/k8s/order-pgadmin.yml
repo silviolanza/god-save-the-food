@@ -1,11 +1,12 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: order-pgadmin-deployment
+  name: order-pgadmin-statefulset
   namespace: slanza
   labels:
     app: order-pgadmin
 spec:
+  serviceName: order-pgadmin
   replicas: 1
   selector:
     matchLabels:
@@ -41,6 +42,18 @@ spec:
                 configMapKeyRef:
                   name: order-configmap
                   key: pgadmin_baseurl
+          volumeMounts:
+            - name: order-pgadmin-persistent-storage
+              mountPath: /data/db
+  volumeClaimTemplates:
+    - metadata:
+        name: order-pgadmin-persistent-storage
+      spec:
+        storageClassName: cdk-cinder
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 2Gi
 ---
 apiVersion: v1
 kind: Service

@@ -1,11 +1,12 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: customer-pgadmin-deployment
+  name: customer-pgadmin-statefulset
   namespace: slanza
   labels:
     app: customer-pgadmin
 spec:
+  serviceName: customer-pgadmin
   replicas: 1
   selector:
     matchLabels:
@@ -41,6 +42,18 @@ spec:
                 configMapKeyRef:
                   name: customer-configmap
                   key: pgadmin_baseurl
+          volumeMounts:
+            - name: customer-pgadmin-persistent-storage
+              mountPath: /data/db
+  volumeClaimTemplates:
+    - metadata:
+        name: customer-pgadmin-persistent-storage
+      spec:
+        storageClassName: cdk-cinder
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 2Gi
 ---
 apiVersion: v1
 kind: Service
