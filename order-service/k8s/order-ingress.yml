@@ -8,7 +8,7 @@ spec:
     - host: gsf.mastercc.hpc4ai.unito.it
       http:
         paths:
-          - path: /api/v1/order/pgadmin
+          - path: /api/v1/orders/pgadmin
             pathType: Prefix
             backend:
               service:
@@ -18,7 +18,7 @@ spec:
     - host: gsf.mastercc.hpc4ai.unito.it
       http:
         paths:
-          - path: /api/v1/order
+          - path: /api/v1/orders
             pathType: Prefix
             backend:
               service:

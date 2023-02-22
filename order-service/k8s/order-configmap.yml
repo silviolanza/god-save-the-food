@@ -8,4 +8,4 @@ data:
   database_name: orderdb
   spring_app_port: "8080"
   pgadmin_listen_port: "5050"
-  pgadmin_baseurl: /api/v1/order/pgadmin
+  pgadmin_baseurl: /api/v1/orders/pgadmin
