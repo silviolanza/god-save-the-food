@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: order-pgadmin-statefulset
+  namespace: slanza
+  labels:
+    app: order-pgadmin
+spec:
+  serviceName: order-pgadmin
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order-pgadmin
+  template:
+    metadata:
+      labels:
+        app: order-pgadmin
+    spec:
+      containers:
+        - name: order-pgadmin
+          image: dpage/pgadmin4
+          ports:
+            - containerPort: 5050
+          env:
+            - name: PGADMIN_DEFAULT_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: order-secret
+                  key: pgadmin-root-email
+            - name: PGADMIN_DEFAULT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: order-secret
+                  key: pgadmin-root-password
+            - name: PGADMIN_LISTEN_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: order-configmap
+                  key: pgadmin_listen_port
+            - name: SCRIPT_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: order-configmap
+                  key: pgadmin_baseurl
+          volumeMounts:
+            - name: order-pgadmin-persistent-storage
+              mountPath: /var/lib/
+              subPath: pgadmin
+  volumeClaimTemplates:
+    - metadata:
+        name: order-pgadmin-persistent-storage
+      spec:
+        storageClassName: cdk-cinder
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 2Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-pgadmin-service
+  namespace: slanza
+spec:
+  selector:
+    app: order-pgadmin
+  ports:
+    - protocol: TCP
+      port: 5050
+      targetPort: 5050
