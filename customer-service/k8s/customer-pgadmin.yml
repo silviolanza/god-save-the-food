@@ -45,6 +45,7 @@ spec:
           volumeMounts:
             - name: customer-pgadmin-persistent-storage
               mountPath: /var/lib/pgadmin
+              subPath: pgadmin
   volumeClaimTemplates:
     - metadata:
         name: customer-pgadmin-persistent-storage
