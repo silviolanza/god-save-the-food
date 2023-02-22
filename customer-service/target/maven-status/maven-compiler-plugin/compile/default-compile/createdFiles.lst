@@ -1,5 +1,0 @@
-com\gsf\userservice\controller\CustomerController.class
-com\gsf\userservice\model\Customer.class
-com\gsf\userservice\repo\CustomerRepository.class
-com\gsf\userservice\UserserviceApplication.class
-com\gsf\userservice\controller\ResponseModel.class
