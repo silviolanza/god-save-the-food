@@ -39,7 +39,8 @@ spec:
                   key: postgres-root-password
           volumeMounts:
             - name: customer-postgres-persistent-storage
-              mountPath: /var/lib/postgresql/data
+              mountPath: /var/lib/postgresql
+              subPath: postgres
   volumeClaimTemplates:
     - metadata:
         name: customer-postgres-persistent-storage

@@ -40,6 +40,7 @@ spec:
           volumeMounts:
             - name: order-postgres-persistent-storage
               mountPath: /var/lib/postgresql/data
+              subPath: postgres
   volumeClaimTemplates:
     - metadata:
         name: order-postgres-persistent-storage
