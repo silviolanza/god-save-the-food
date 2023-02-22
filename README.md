@@ -47,10 +47,10 @@
     http://gsf.mastercc.hpc4ai.unito.it/api/v1/customers/pgadmin
     
 	Per effettuare la ricerca di un cliente per mail:
-	http://gsf.mastercc.hpc4ai.unito.it/api/v1/customers/profile/email/luc@luc
+	http://gsf.mastercc.hpc4ai.unito.it/api/v1/customers/profile/email/silviolanza@gmail.com
 	
 	Per effettuare la ricerca di un cliente per codice fiscale:
-	http://gsf.mastercc.hpc4ai.unito.it/api/v1/customers/profile/cf/cas24sf4
+	http://gsf.mastercc.hpc4ai.unito.it/api/v1/customers/profile/cf/lcaodn95m28f698k
 	
 	Per avere la lista di tutti i clienti:
 	http://gsf.mastercc.hpc4ai.unito.it/api/v1/customers
