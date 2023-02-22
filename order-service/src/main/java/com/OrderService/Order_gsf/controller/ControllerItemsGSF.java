@@ -23,7 +23,7 @@ public class ControllerItemsGSF {
    @Autowired
    private ItemsGSFService itemGSFService;
 
-    @GetMapping (value = "/order/item/{id}" )
+    @GetMapping (value = "/orders/item/{id}" )
    public ResponseEntity<?>getItems ( @PathVariable("id") long id){
         Optional<ItemsGSF> item= itemGSFService.getItem(id);
         if(item!=null)
@@ -31,7 +31,7 @@ public class ControllerItemsGSF {
         return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
     }
-    @GetMapping("/order/item")
+    @GetMapping("/orders/item")
     public List<ItemsGSF> getAllItems() {
         System.out.println("Get all items...");
         List<ItemsGSF> items = new ArrayList<>();
@@ -39,7 +39,7 @@ public class ControllerItemsGSF {
         return items;
     }
 
-    @PostMapping(value = "/order/item/create")
+    @PostMapping(value = "/orders/item/create")
     public ResponseEntity<?> addItem(@RequestBody ItemsGSF item) {
         int p=5;
         int qta=7;
@@ -53,7 +53,7 @@ public class ControllerItemsGSF {
 
         return new ResponseEntity<List<Object>>(HttpStatus.CREATED);
     }
-    @DeleteMapping(value = "/order/item/delete/{id}")
+    @DeleteMapping(value = "/orders/item/delete/{id}")
     public ResponseEntity<?> removeItem( @PathVariable("id") long id){
         Optional<ItemsGSF> item = itemGSFService.getItem(id);
         if(item != null) {
@@ -62,7 +62,7 @@ public class ControllerItemsGSF {
         }
         return new ResponseEntity<Void> (HttpStatus.NOT_FOUND);
     }
-    @GetMapping("order/item/init")
+    @GetMapping("/orders/item/init")
     public ResponseEntity<?> init(){
         //creazione di un ordine
         System.out.println("init item...");

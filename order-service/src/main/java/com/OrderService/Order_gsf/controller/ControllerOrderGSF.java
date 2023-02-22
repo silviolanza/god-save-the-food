@@ -26,7 +26,7 @@ public class ControllerOrderGSF {
 
 
 
-    @PostMapping(value = "/order/create")
+    @PostMapping(value = "/orders/create")
      public ResponseEntity saveOrder(@RequestBody OrderRequest items) {
         String userId="Giuseppe";
        List<ItemsGSF> item_id = items.getItems();
@@ -63,14 +63,14 @@ public class ControllerOrderGSF {
         }
         return total;
     }
-    @GetMapping("/order")
+    @GetMapping("/orders")
     public List<OrderGSF> getAllItems() {
         System.out.println("Get all order...");
         List<OrderGSF> order = new ArrayList<>();
         order= orderGSFService.getAllOrder();
         return order;
     }
-    @GetMapping("order/init")
+    @GetMapping("/orders/init")
     public ResponseEntity<?> init(){
         //creazione di un ordine
         ItemsGSF it1= new ItemsGSF(1,10,BigDecimal.valueOf(10.12));
