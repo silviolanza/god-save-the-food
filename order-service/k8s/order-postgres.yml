@@ -39,7 +39,7 @@ spec:
                   key: postgres-root-password
           volumeMounts:
             - name: order-postgres-persistent-storage
-              mountPath: /data/db
+              mountPath: /var/lib/postgresql/data
   volumeClaimTemplates:
     - metadata:
         name: order-postgres-persistent-storage
