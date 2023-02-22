@@ -41,6 +41,16 @@ spec:
                 configMapKeyRef:
                   name: store-configmap
                   key: mongo_express_baseurl
+            - name: ME_CONFIG_BASICAUTH_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: store-secret
+                  key: mongo-express-root-email
+            - name: ME_CONFIG_BASICAUTH_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: store-secret
+                  key: mongo-express-root-password
 ---
 apiVersion: v1
 kind: Service
