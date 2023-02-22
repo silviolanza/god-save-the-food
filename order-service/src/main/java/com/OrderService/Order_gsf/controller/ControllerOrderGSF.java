@@ -45,9 +45,12 @@ public class ControllerOrderGSF {
 
     private OrderGSF createOrder(List<ItemsGSF> item, String user) {
         OrderGSF order = new OrderGSF();
-        order.setItem(item);
+        List<ItemsGSF> arr= new ArrayList();
+        ItemsGSF it1= new ItemsGSF(1,10,BigDecimal.valueOf(10.12));
+        arr.add(it1);
+        order.setItem(arr);
         order.setUser(user);
-        order.setTotal(BigDecimal.valueOf(12.00));
+        //order.setTotal(BigDecimal.valueOf(10.10));
         order.setDate(LocalDate.now());
         order.setStatus("PAYMENT_EXPECTED");
         return order;
@@ -67,4 +70,37 @@ public class ControllerOrderGSF {
         order= orderGSFService.getAllOrder();
         return order;
     }
+    @GetMapping("order/init")
+    public ResponseEntity<?> init(){
+        //creazione di un ordine
+        ItemsGSF it1= new ItemsGSF(1,10,BigDecimal.valueOf(10.12));
+        ItemsGSF it2= new ItemsGSF(6,3,BigDecimal.valueOf(11.00));
+        ItemsGSF it3= new ItemsGSF(12,14,BigDecimal.valueOf(11.00));
+        ItemsGSF it4= new ItemsGSF(32,1,BigDecimal.valueOf(70.00));
+        ItemsGSF it5= new ItemsGSF(2,2,BigDecimal.valueOf(25.00));
+        ItemsGSF it6= new ItemsGSF(2,22,BigDecimal.valueOf(5.00));
+
+        List<ItemsGSF> item1=new ArrayList<>();
+        List<ItemsGSF> item2=new ArrayList<>();
+        List<ItemsGSF> item3=new ArrayList<>();
+        List<ItemsGSF> item4=new ArrayList<>();
+        List<ItemsGSF> item5=new ArrayList<>();
+        item1.add(it1);
+        item2.add(it4);
+        item3.add(0,it2);
+        item3.add(1,it3);
+        item4.add(it5);
+        item5.add(0,it5);
+        item5.add(1,it6);
+        System.out.println("Order creation started...");
+        orderGSFService.saveOrder(new OrderGSF("federico.gallarati", LocalDate.now(), BigDecimal.valueOf(70.00), "PAYMENT_EXPECTED",item2));
+        orderGSFService.saveOrder(new OrderGSF("luca.oddone", LocalDate.now(), BigDecimal.valueOf(30.00), "PAYMENT_EXPECTED",item5));
+        orderGSFService.saveOrder(new OrderGSF("pietro.esposito", LocalDate.now(), BigDecimal.valueOf(25.00), "PAYMENT_EXPECTED",item4));
+        orderGSFService.saveOrder(new OrderGSF("silvio.lanza", LocalDate.now(), BigDecimal.valueOf(22.00), "PAYMENT_EXPECTED",item3));
+        orderGSFService.saveOrder(new OrderGSF("ciro.rossi", LocalDate.now(), BigDecimal.valueOf(10.12), "PAYMENT_EXPECTED",item1));
+        System.out.println("Order creation complete...");
+        //cerca oggetto tramite il nome
+        return ResponseEntity.status(200).body("Init complete...");
+    }
+
 }

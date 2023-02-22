@@ -22,7 +22,7 @@ public class CustomerController {
     public Customer findByEmail(@PathVariable String email) {return repository.findByEmail(email);}
 
     @GetMapping(value = "/customers/profile/cf/{cf}")
-    public List<Customer> findByCf(@PathVariable String cf) {
+    public Customer findByCf(@PathVariable String cf) {
         return repository.findByCf(cf);
     }
 
@@ -39,7 +39,14 @@ public class CustomerController {
     }
     @PostMapping(value = "/customers/create")
     public Customer postCustomer(@RequestBody Customer customer) {
-        return repository.save(new Customer(customer.getName(), customer.getFirstName(),customer.getEmail(), customer.getCf(), customer.getAddress(), customer.getAge(), customer.getPassword()));
+        try{
+            String cfDb = repository.findByCf(customer.getCf()).getCf();
+            String emailDb = repository.findByEmail(customer.getEmail()).getEmail();
+            if ((emailDb.equals(customer.getEmail()) || cfDb.equals(customer.getCf()))) {
+                return null;
+            } else return repository.save(new Customer(customer.getName(), customer.getEmail(), customer.getFirstName(), customer.getAddress(), customer.getCf(), customer.getAge(), customer.getPassword()));
+        } catch (NullPointerException e){
+            return repository.save(new Customer(customer.getName(), customer.getEmail(), customer.getFirstName(), customer.getAddress(), customer.getCf(), customer.getAge(), customer.getPassword()));        }
     }
     @PostMapping(value = "/customers/create1")
     public Customer postCustomer1() {

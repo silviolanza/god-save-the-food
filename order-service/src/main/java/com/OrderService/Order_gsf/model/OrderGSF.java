@@ -25,8 +25,8 @@ public class OrderGSF {
 
         @Column(name="status")
         private String status;
-        @OneToMany
-        @Column(name="item_id")
+        @OneToMany(cascade =CascadeType.ALL )
+        @JoinColumn(name="item")
         private List<ItemsGSF> item;
 
         public Long getId() {
@@ -78,12 +78,12 @@ public class OrderGSF {
             this.item = item;
         }
 
-        public OrderGSF(String userid, LocalDate date, BigDecimal total, String status) {
+        public OrderGSF(String userid, LocalDate date, BigDecimal total, String status,List<ItemsGSF> item) {
             this.userid = userid;
             this.date = date;
             this.total = total;
             this.status = status;
-           // this.item = item;
+            this.item = item;
         }
 
         public OrderGSF(){}
