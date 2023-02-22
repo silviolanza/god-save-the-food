@@ -9,4 +9,4 @@ data:
   database_db_auth: admin
   database_name: products
   spring_app_port: "8080"
-  mongo_express_baseurl: /api/products/express
+  mongo_express_baseurl: /api/v1/products/express

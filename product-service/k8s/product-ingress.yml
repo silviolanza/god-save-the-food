@@ -8,7 +8,7 @@ spec:
     - host: gsf.mastercc.hpc4ai.unito.it
       http:
         paths:
-          - path: /api/products/express
+          - path: /api/v1/products/express
             pathType: Prefix
             backend:
               service:
@@ -18,7 +18,7 @@ spec:
     - host: gsf.mastercc.hpc4ai.unito.it
       http:
         paths:
-          - path: /api/products
+          - path: /api/v1/products
             pathType: Prefix
             backend:
               service:
