@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="88ba443c-23e1-42fb-a8c5-4a203203986a" name="Changes" comment="Update customer-service pom.xml">
+      <change afterPath="$PROJECT_DIR$/../order-service/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../order-service/k8s/order-configmap.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../order-service/k8s/order-ingress.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../order-service/k8s/order-pgadmin.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../order-service/k8s/order-postgres.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../order-service/k8s/order-secret.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../order-service/k8s/order-service.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../product-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../product-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../store-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../store-service/pom.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="workspaceImportEnabled" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2M2j55X2p9NyGvcjSRsrVqGTKRM" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/god-save-the-food/order-service",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\god-save-the-food\customer-service\src\k8s" />
+      <recent name="C:\god-save-the-food\customer-service" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\god-save-the-food\customer-service" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="UserserviceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="customer-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.gsf.userservice.UserserviceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="88ba443c-23e1-42fb-a8c5-4a203203986a" name="Changes" comment="" />
+      <created>1676972386591</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1676972386591</updated>
+      <workItem from="1676972387795" duration="17575000" />
+    </task>
+    <task id="LOCAL-00001" summary="Update customer-service pom.xml">
+      <created>1676972502222</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1676972502222</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Update customer-service pom.xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update customer-service pom.xml" />
+  </component>
+</project>
