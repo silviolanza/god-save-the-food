@@ -24,5 +24,22 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           
       - name: Build the Docker image of Customer Service
-        run:  docker build --no-cache -t silviolanza/customer-spring-app:$(date +%s) ./customer-service
+        run:  docker build --no-cache -t silviolanza/customer-spring-app:latest ./customer-service
+      - name: Push the Docker image of Customer Service on DockerHUB Repository
+        run:  docker push silviolanza/customer-spring-app:latest
+          
+      - name: Build the Docker image of Order Service
+        run:  docker build --no-cache -t silviolanza/order-spring-app:latest    ./order-service
+      - name: Push the Docker image of Order Service on DockerHUB Repository
+        run:  docker push silviolanza/order-spring-app:latest
+          
+      - name: Build the Docker image of Store Service
+        run:  docker build --no-cache -t silviolanza/store-spring-app:latest    ./store-service
+      - name: Push the Docker image of Store Service on DockerHUB Repository
+        run:  docker push silviolanza/store-spring-app:latest
+          
+      - name: Build the Docker image of Product Service
+        run:  docker build --no-cache -t silviolanza/product-spring-app:latest  ./product-service
+      - name: Push the Docker image of Product Service on DockerHUB Repository
+        run:  docker push silviolanza/product-spring-app:latest
       
